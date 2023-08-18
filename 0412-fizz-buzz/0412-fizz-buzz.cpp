@@ -1,7 +1,3 @@
-#include <string>
-#include <iostream>
-#include <vector>
-
 class Solution {
 public:
     vector<string> fizzBuzz(int n) {
