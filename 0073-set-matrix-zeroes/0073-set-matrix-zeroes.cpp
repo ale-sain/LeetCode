@@ -1,25 +1,49 @@
 class Solution {
-    private:
-            void recursion(std::vector<std::vector<int>> &matrix, int pos)
-            {
-                int n = matrix[0].size();
-                int m = matrix.size();
-                if (pos == m * n)
-                    return ;
-                while (pos < m * n - 1 && matrix[pos / n][pos % n] != 0)
-                    pos++;
-                if (matrix[pos / n][pos % n] == 0)
-                {
-                    recursion(matrix, pos + 1);
-                    for (int line = 0 ; line < m ; line++)
-                        matrix[line][pos % n] = 0;
-                    for (int col = 0 ; col < n ; col++)
-                        matrix[pos / n][col] = 0;
-                }
-            }
-
     public:
             void setZeroes(vector<vector<int>>& matrix) {
-                recursion(matrix, 0);
+                int n = matrix[0].size();
+                int m = matrix.size();
+                bool zeroCol = false;
+                bool zeroRow = false;
+                for (int i = 0 ; i < m ; i++)
+                {
+                    for (int j = 0 ; j < n ; j++)
+                    {
+                        if (matrix[i][j] == 0)
+                        {
+                            matrix[0][j] = matrix[i][0] = 0;
+                            if (i == 0)
+                                zeroRow = true;
+                            if (j == 0)
+                                zeroCol = true;
+                        }
+                    }
+                }
+                for (int j = 1 ; j < n ; j++)
+                {
+                    if (matrix[0][j] == 0)
+                    {
+                        for (int i = 1; i < m ; i++)
+                            matrix[i][j] = 0;
+                    }
+                }
+                for (int i = 1 ; i < m ; i++)
+                {
+                    if (matrix[i][0] == 0)
+                    {
+                        for (int j = 1; j < n; j++)
+                            matrix[i][j] = 0;
+                    }
+                }
+                if (zeroCol)
+                {
+                    for (int i = 0 ; i < m ; i++)
+                        matrix[i][0] = 0;
+                }
+                if (zeroRow)
+                {
+                    for (int j = 0 ; j < n ; j++)
+                        matrix[0][j] = 0;
+                }
         }
 };
