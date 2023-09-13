@@ -1,20 +1,16 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        std::string str = "";
-        for (int i = 0 ; i < s.size() ; i++)
+        int i = 0 ;
+        int j = s.size() - 1;
+        while (i < j)
         {
-            if (std::isalnum(s[i]))
-                str += (std::isupper(s[i]) ? std::tolower(s[i]) : s[i]);
-        }
-        if (str.size() == 0 || str.size() == 1)
-            return true;
-        int j = str.size() - 1;
-        for (int i = 0 ; i <= j ; i++)
-        {
-            if (str[i] != str[j])
+            if (!isalnum(s[i]))
+                i++;
+            else if (!isalnum(s[j]))
+                j--;
+            else if (tolower(s[i++]) != tolower(s[j--]))
                 return false;
-            j--;
         }
         return true;
     }
