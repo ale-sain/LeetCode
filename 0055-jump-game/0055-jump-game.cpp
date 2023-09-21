@@ -1,15 +1,12 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        if (!nums.size())
-            return false;
-        int farest = 0;
-        for (int i = 0 ; i < nums.size() ; i++)
+        int prec, k = nums.size() - 1;
+        for (prec = k - 1 ; prec >= 0 ; prec--)
         {
-            if (i > farest)
-                return false;
-            farest = std::max(farest, i + nums[i]);
+            if (prec >= k - nums[prec])
+                k = prec;
         }
-        return true;
+        return (k == 0);
     }
 };
